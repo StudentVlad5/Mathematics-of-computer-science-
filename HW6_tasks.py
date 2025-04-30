@@ -28,7 +28,7 @@ plt.grid(True)
 plt.xticks(x_vals)
 plt.show()
 
-
+# task 2
 from math import comb
 import matplotlib.pyplot as plt
 
@@ -59,6 +59,7 @@ plt.grid(True)
 plt.xticks(x_vals)
 plt.show()
 
+# Task 3
 
 from itertools import product
 
@@ -90,7 +91,7 @@ if sum_11 > sum_12:
 else:
     print("▶️ Сума 12 імовірніша або дорівнює сумі 11.")
 
-
+# Task 6
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -128,3 +129,28 @@ ax.set_ylabel('Ймовірність')
 ax.set_title('Симуляція: яка куля залишилася, якщо витягли білу')
 plt.grid(axis='y')
 plt.show()
+
+# Task 7
+import numpy as np
+import matplotlib.pyplot as plt
+
+def simulate_walks(n_simulations, steps=3):
+    # Одне блукання: на кожному кроці або +2, або -1 з рівною ймовірністю
+    outcomes = np.random.choice([2, -1], size=(n_simulations, steps))
+    final_prices = outcomes.sum(axis=1)
+    return final_prices
+
+# Кількість симуляцій для аналізу
+simulations_counts = [10, 100, 1000, 10000]
+
+for n in simulations_counts:
+    results = simulate_walks(n)
+    mean_price = np.mean(results)
+    print(f"Симуляцій: {n}, Середнє значення: {mean_price:.4f}")
+    
+    plt.hist(results, bins=range(min(results), max(results) + 2), align='left', rwidth=0.8, edgecolor='black')
+    plt.title(f'Гістограма цін після 3 кроків ({n} симуляцій)')
+    plt.xlabel('Ціна')
+    plt.ylabel('Частота')
+    plt.grid(True)
+    plt.show()
